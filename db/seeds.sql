@@ -1,0 +1,9 @@
+DROP DATABASE IF EXISTS 
+
+CREATE DATABASE 
+
+CREATE TABLE employees (
+  id INT NOT NULL auto
+
+  name VARCHAR(30) NOT NULL
+); 
