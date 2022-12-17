@@ -1,64 +1,41 @@
-// TODO: Include packages needed for this application
-const inquirer = require("inquirer");
-const fs = require("fs");
-employees = []
-// const table = require("table");
 
-// TODO: Create an array of questions for user input
-const questions = [
-  {
-    type: "list",
-    message: "What would you like to do?",
-    name: "start",
-    choices: [
-      {
-        name: "departments",
-        value:
-          "View all departments",
-      },
-      {
-        name: "roles",
-        value:
-          "View all roles",
-      },
-      {
-        name: "employees",
-        value:
-          "View all employees",
-      },
-      {
-        name: "addDepartment",
-        value:
-          "Add a new department",
-      },
-      {
-        name: "addRole",
-        value:
-          "Add a new role",
-      },
-      {
-        name: "addEmployee",
-        value:
-          "Add a new employee",
-      },
-      {
-        name: "updateRole",
-        value:
-          "Update an employee's role",
-      },
-    ],
-  },
+const { prompt, default: inquirer } = require("inquirer");
+const db = require("./db/connection");
+const { viewAllDepartments } = require('./db/departments'); 
+const { viewAllEmployess } = require('./db/employees'); 
 
-  // TODO: Create a function to initialize app
+const start = async () => {
+    console.log("Welcome to the Employee Manager!");
+    const { choice } = await prompt([
+        { 
+        type: "list",
+        name: "choice", 
+        message: "what would you like to do?",
+        choices: [
+                "View All Departments", 
+                "View All Roles", 
+                "View All Employees", 
+                "Add A Department", 
+                "Add a Role", 
+                "Add an Employee", 
+                "Update Employee Role", 
+                "Exit"
+            ]
+         }
 
-function init() {
-  inquirer.prompt(questions).then((respose) => {
-    const md = generateMarkdown(respose);
-    writeToFile("README.md", md);
-  });
+    ])
+        switch (choice) { 
+            case 'View All Departments': 
+                const departments = await viewAllDepartments()
+                console.table(departments)
+                break;
+            case 'View All Employees':
+                const employees = await viewAllEmployess()
+                console.table(employees) 
+                break;   
+    }
+
 }
 
-];
-// Function call to initialize app
 
-init();
+start();
