@@ -2,10 +2,10 @@
 const { prompt, default: inquirer } = require("inquirer");
 const db = require("./db/connection");
 const { viewAllDepartments } = require('./db/departments'); 
-const { viewAllEmployess } = require('./db/employees'); 
+const { viewAllEmployess, addEmployee } = require('./db/employees'); 
 
-const start = async () => {
-    console.log("Welcome to the Employee Manager!");
+const start = async (s) => {
+    if (s) console.log("Welcome to the Employee Manager!");
     const { choice } = await prompt([
         { 
         type: "list",
@@ -33,9 +33,22 @@ const start = async () => {
                 const employees = await viewAllEmployess()
                 console.table(employees) 
                 break;   
+            case 'View All Roles':
+                const roles = await viewAllRoles()
+                console.table(roles)
+                break; 
+            case 'Add an Employee': 
+                const newEmployees = await addEmployee()
+                console.table(newEmployees)
+                break; 
+
+            case 'Exit': 
+                console.log('Adios Amigo') 
+                process.exit(); 
     }
+start(false)
 
 }
 
 
-start();
+start(true);

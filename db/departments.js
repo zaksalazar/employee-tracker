@@ -5,7 +5,7 @@
     const departments = 
       await db.query(' SELECT * FROM department')
 
-    return departments [0]
+    return departments
   } catch (err) {
     console.log(err) 
 
