@@ -16,7 +16,7 @@
 async function addDepartment() {
   try {
     const departments = await viewAllDepartments();
-    const { id, name} = await inquirer.prompt([
+    const {name} = await prompt([
       {
         type: "input",
         name: "name",
@@ -25,7 +25,7 @@ async function addDepartment() {
     ]);
 
     await db.query(
-      `INSERT INTO department (id, name) VALUES ("${id}", "${name}")`
+      `INSERT INTO department (name) VALUES ("${name}")`
     );
     const newDepartment = await viewAllDepartments();
 
