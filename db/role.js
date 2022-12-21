@@ -50,4 +50,32 @@ async function addRole() {
     console.log(err);
   }
 }
-module.exports = { viewRoles, addRole };
+async function deleteARole() {
+  try {
+    const allRoles = await viewRoles();
+    const { id } = await inquirer.prompt([
+      {
+        type: "list",
+        message: "Which role would you like to delete?",
+        name: "id",
+        choices: allRoles.map((r) => {
+          return {
+            name: r.title,
+            value: r.id,
+          };
+        }),
+      },
+    ]);
+    await db.query(`DELETE FROM role Where id = ${id}`);
+
+    return await viewRoles();
+  } catch (err) {
+    console.log(err);
+  }
+}
+module.exports = {
+  viewRoles,
+  addRole,
+  deleteARole,
+};
+
