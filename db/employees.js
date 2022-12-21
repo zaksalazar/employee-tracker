@@ -81,7 +81,7 @@ async function updateEmployee() {
     ]);
 
     await db.query(
-      `UPDATE employee SET role_id = ${newRole} WHERE role_id = ${employee}`
+      `UPDATE employee SET role_id = ${newRole} WHERE id = ${employee}`
     );
     const updatedEmployee = await viewAllEmployees();
     return await viewAllEmployees();

@@ -5,7 +5,7 @@ const { viewAllDepartments } = require("./departments");
 async function viewRoles() {
   try {
     const role = await db.query(
-      "SELECT role.title, role.id, department.name, role.salary FROM role LEFT JOIN department ON role.id = department.id"
+      `SELECT role.title, role.id, department.name, role.salary FROM role INNER JOIN department ON role.department_id = department.id`
     );
     return role;
   } catch (err) {

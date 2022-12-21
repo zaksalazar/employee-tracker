@@ -3,7 +3,7 @@ This command line interface allows and employer to view and manage departments, 
 
 ## Mock Up 
 The following demonstrated the functionality of the CLI 
-
+https://drive.google.com/file/d/14cruEov4Cn3sigfUgs5loV_ovtD5qaik/view?usp=share_link
 
 ## GitHub Link 
 Below is a link to the corresponding GitHub Repo 
