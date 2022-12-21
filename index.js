@@ -1,9 +1,9 @@
 
 const { prompt, default: inquirer } = require("inquirer");
 const db = require("./db/connection");
-const { viewAllDepartments } = require('./db/departments'); 
-const { viewAllEmployees, addEmployee } = require('./db/employees');
-const { viewRoles } = require('./db/role');
+const { viewAllDepartments, addDepartment } = require('./db/departments'); 
+const { viewAllEmployees, addEmployee, updateEmployee } = require('./db/employees');
+const { viewRoles, addRole } = require('./db/role');
 
 const start = async (s) => {
     if (s) console.log("Welcome to the Employee Manager!");
@@ -16,7 +16,7 @@ const start = async (s) => {
                 "View All Departments", 
                 "View All Roles", 
                 "View All Employees", 
-                "Add A Department", 
+                "Add a Department", 
                 "Add a Role", 
                 "Add an Employee", 
                 "Update Employee Role", 
@@ -37,10 +37,23 @@ const start = async (s) => {
             case 'View All Roles':
                 const roles = await viewRoles()
                 console.table(roles)
+                break;
+            case 'Add a Department':
+                const Newdepartment = await addDepartment() 
+                console.table(Newdepartment)
+                break;
             case 'Add an Employee': 
                 const newEmployees = await addEmployee()
                 console.table(newEmployees)
                 break;  
+            case 'Add a Role':
+                const newRole = await addRole()
+                console.table(newRole)
+                break;
+            case `Update Employee Role`:
+                const updatedEmployee = await updateEmployee()
+                console.table(updatedEmployee)
+                break;
             case 'Exit': 
                 console.log('Adios Amigo') 
                 process.exit(); 
